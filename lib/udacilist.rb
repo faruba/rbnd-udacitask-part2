@@ -22,18 +22,36 @@ class UdaciList
 		end
   end
   def all
+		print_items(@items)
+	end
+
+	def filter(type)
+		result = @items.select{ |item| get_item_type(item) == type}
+		if result.length == 0
+			puts "sorry, you don't have #{type} type TODO item"
+		else
+			print_items(result, ">>>Filter By:#{type}<<<")
+		end
+	end
+	
+	private
+	def get_item_type(item)
+		item.class.to_s.gsub("Item", "").downcase
+	end
+
+	def print_items(items, append_title = "")
+		new_title = @title + "   " + append_title
 		rows = []
 		
-    @items.each_with_index do |item, position|
-			rows << ["#{position + 1}", "#{item.details}"]
-			if position < @items.length - 1
-				rows << :separator
-			end
+		rows << ["Id",{:value => "Details", :alignment => :center},"type"]
+    items.each_with_index do |item, position|
+			rows << :separator
+			rows << ["#{position + 1}", "#{item.details}", get_item_type(item)]
     end
 		table = Terminal::Table.new(:rows => rows) 
 
-    puts "-" * @title.length
-    puts @title
+    puts "-" * new_title.length
+    puts new_title
 		puts table
-  end
+	end
 end
