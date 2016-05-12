@@ -46,3 +46,10 @@ new_list.all
 # DEMO FILTER BY ITEM TYPE
 # ------------------------
 new_list.filter("event")
+
+item_1 = TodoItem.new "priority  low",  priority: "low"
+puts item_1.details
+item_1.change_priority("high")
+puts item_1.details
+new_list.delete_multiple(1,3)
+new_list.all

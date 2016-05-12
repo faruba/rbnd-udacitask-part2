@@ -21,7 +21,7 @@ class UdaciList
 			@items.delete_at(index - 1)
 		end
   end
-  def all
+	def all
 		print_items(@items)
 	end
 
@@ -32,6 +32,16 @@ class UdaciList
 		else
 			print_items(result, ">>>Filter By:#{type}<<<")
 		end
+	end
+
+	def delete_multiple(*delete_index_list)
+		result = []
+		@items.each_with_index do |item, index|
+			unless delete_index_list.include?(index)
+				result << item
+			end
+		end
+		@items = result
 	end
 	
 	private

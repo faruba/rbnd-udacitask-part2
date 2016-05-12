@@ -8,7 +8,7 @@ class TodoItem
     @description = description
     @due = options[:due] ? Chronic.parse(options[:due]) : options[:due]
 		@priority = options[:priority]
-		if @priority != nil && @@support_priority.index(options[:priority]) == nil
+		unless is_valid?(@priority)
 			raise UdaciListErrors::InvalidPriorityValue , "unknow priority type:#{options[:priority]}"
 		end
   end
@@ -16,5 +16,17 @@ class TodoItem
     format_description(@description) + "due: " +
     format_date(@due) +
     format_priority(@priority)
+	end
+
+	def change_priority(priority)
+		if is_valid?(priority)
+			@priority = priority
+		else
+			raise UdaciListErrors::InvalidPriorityValue , "unknow priority type:#{options[:priority]}"
+		end
+	end
+
+	def is_valid?(priority)
+		priority == nil || @@support_priority.include?(priority)
 	end
 end
