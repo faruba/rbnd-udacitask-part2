@@ -1,6 +1,5 @@
 require_relative "./errors"
 class UdaciList
-	include UdaciListErrors
   attr_reader :title, :items
 
   def initialize(options={})
@@ -12,12 +11,12 @@ class UdaciList
 			when "todo"  then @items.push TodoItem.new(description, options)
 			when "event" then @items.push EventItem.new(description, options)
 			when "link"  then @items.push LinkItem.new(description, options) 
-			else raise InvalidItemType , "Invalid type: #{type}"
+			else raise UdaciListErrors::InvalidItemType , "Invalid type: #{type}"
 		end
   end
   def delete(index)
 		if index <= 0 || index > @items.length
-			raise IndexExceedsListSize , "Array length:[#{@items.length}],out of range : #{index}"	
+			raise UdaciListErrors::IndexExceedsListSize , "Array length:[#{@items.length}],out of range : #{index}"	
 		else
 			@items.delete_at(index - 1)
 		end
