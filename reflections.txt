@@ -12,9 +12,21 @@ and use @items to create a table
 1. How long did you spend working on this project?
 about 3 h
 2. What was the most rewarding challenge you conquered?
-reading ruby-doc. ruby's API is a little weird. delete_multiple is easy.
+reading ruby-doc. ruby's API is a little weird.
+many high order function of array don't pass index to block. Enumerator.each_with_index  ?
+not work
+`		puts @items.delete_if.each_with_index.each {|item, index|
+			delete_index_list.include?(index)
+		}
+`
+using delete_if to implement  delete_multiple  is easy understand . 
+but i have to use "-" ,which took me lots of time to find.
+
+
+delete_multiple is easy.
 I want to finished it by just one line,it took me so much time.
 without internet, all I got is ruby-doc.
+
 
 3. What two additional features did you build? Why?
 multiple delete  and change priority.
