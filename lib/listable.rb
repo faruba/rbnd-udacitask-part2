@@ -6,9 +6,9 @@ module Listable
 
 	def format_priority(priority)
 		case priority
-			when "high"   then " ⇧" 
-			when "medium" then " ⇨" 
-			when "low"    then " ⇩" 
+			when "high"   then " ⇧".colorize(:red) 
+			when "medium" then " ⇨".colorize(:yellow) 
+			when "low"    then " ⇩".colorize(:blue) 
 			else ""
 		end
 	end

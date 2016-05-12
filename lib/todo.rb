@@ -6,7 +6,7 @@ class TodoItem
 
   def initialize(description, options={})
     @description = description
-    @due = options[:due] ? Date.parse(options[:due]) : options[:due]
+    @due = options[:due] ? Chronic.parse(options[:due]) : options[:due]
 		@priority = options[:priority]
 		if @priority != nil && @@support_priority.index(options[:priority]) == nil
 			raise UdaciListErrors::InvalidPriorityValue , "unknow priority type:#{options[:priority]}"

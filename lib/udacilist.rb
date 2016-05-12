@@ -3,7 +3,7 @@ class UdaciList
   attr_reader :title, :items
 
   def initialize(options={})
-    @title = options[:title]
+    @title = options[:title] ? options[:title] : "Untitled List"
     @items = []
   end
   def add(type, description, options={})
@@ -22,11 +22,18 @@ class UdaciList
 		end
   end
   def all
+		rows = []
+		
+    @items.each_with_index do |item, position|
+			rows << ["#{position + 1}", "#{item.details}"]
+			if position < @items.length - 1
+				rows << :separator
+			end
+    end
+		table = Terminal::Table.new(:rows => rows) 
+
     puts "-" * @title.length
     puts @title
-    puts "-" * @title.length
-    @items.each_with_index do |item, position|
-      puts "#{position + 1}) #{item.details}"
-    end
+		puts table
   end
 end
