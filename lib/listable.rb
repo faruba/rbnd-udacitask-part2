@@ -4,10 +4,6 @@ module Listable
     "#{description}".ljust(30)
 	end
 
-	def format_date
-		@due ? @due.strftime("%D") : ""
-	end
-
 	def format_priority(priority)
 		case priority
 			when "high"   then " ⇧" 
