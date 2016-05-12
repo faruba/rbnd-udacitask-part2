@@ -35,13 +35,7 @@ class UdaciList
 	end
 
 	def delete_multiple(*delete_index_list)
-		result = []
-		@items.each_with_index do |item, index|
-			unless delete_index_list.include?(index)
-				result << item
-			end
-		end
-		@items = result
+		@items = @items - @items.values_at(*delete_index_list)
 	end
 	
 	private
